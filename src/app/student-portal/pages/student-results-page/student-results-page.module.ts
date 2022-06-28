@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StudentResultsPageComponent } from './student-results-page.component';
+import { RouterModule } from '@angular/router';
+import { StudentResultSearchRoutingModule } from './student-result-view-routing.module';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
-  declarations: [StudentResultsPageComponent]
+  imports: [CommonModule, RouterModule, StudentResultSearchRoutingModule],
+  declarations: [],
+  exports: [],
 })
-export class StudentResultsPageModule { }
+export class StudentResultsPageModule {}
