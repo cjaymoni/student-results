@@ -45,3 +45,5 @@ export const setToken = () => {
 export const getUserIdFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem(APP_USER_TOKEN)!)?.id;
 };
+
+export const DEFAULT_PAGE_SIZE = 200;
