@@ -9,6 +9,7 @@ import {
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { AuthenticationService } from '../services/auth.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { MatInputModule } from '@angular/material/input';
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline', floatLabel: 'auto' },
     },
+    AuthenticationService,
   ],
 })
 export class LoginPageModule {}

@@ -8,35 +8,47 @@ import { environment } from 'src/environments/environment';
 import { Ability, AbilityBuilder } from '@casl/ability';
 import { User } from '../models/auth.model';
 import { ResourceService } from 'src/app/shared/services/resources.service';
+import { NavigatorService } from '../../../../shared/services/navigator.service';
+import { capitalizeFirstLetter } from 'src/app/shared/utils/app-constants';
+import { StaffEndPoint } from 'src/app/shared/utils/endpoints';
 
-const ENDPOINT = 'users';
+const LoginEndPoint = 'users';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService extends ResourceService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
+  // private userSubject: BehaviorSubject<User>;
+  // public user: Observable<User>;
 
-  public loggedInUser;
+  // public loggedInUser;
 
   constructor(
-    private router: Router,
+    private readonly navigator: NavigatorService,
     http: HttpClient,
     private ability: Ability
   ) {
-    super(http, ENDPOINT);
-    this.userSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('user'))
-    );
-    this.user = this.userSubject;
-    this.loggedInUser = this.user['_value'];
-    this.updateAbility(this.loggedInUser || []);
+    super(http, LoginEndPoint);
+    // this.userSubject = new BehaviorSubject<User>(
+    //   JSON.parse(localStorage.getItem('user'))
+    // );
+    // this.user = this.userSubject;
+    // this.loggedInUser = this.user['_value'];
+    // this.updateAbility(this.loggedInUser || []);
 
     // console.log(this.loggedInUser);
   }
-
-  public get userValue(): User {
-    return this.userSubject.value;
+  get loggedInUser(): any {
+    if (!localStorage.getItem('user')) return null;
+    try {
+      return JSON.parse(localStorage.getItem('user') || '');
+    } catch (error) {
+      this.logout();
+      return null;
+    }
   }
+
+  // public get userValue(): User {
+  //   return this.userSubject.value;
+  // }
   private updateAbility(user: any) {
     const { can, rules } = new AbilityBuilder(Ability);
 
@@ -130,33 +142,56 @@ export class AuthenticationService extends ResourceService {
 
     this.ability.update(rules);
   }
-  capitalizeFirstLetter(text: string) {
-    return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-  }
-  login(email: string, password: string) {
-    return super
-      .getResources(null, 'staffs/userLogin', true, {
-        email: email,
-        password: password,
+
+  // login(email: string, password: string) {
+  //   return super
+  //     .getResources(null, 'staffs/userLogin', true, {
+  //       email: email,
+  //       password: password,
+  //     })
+  //     .pipe(
+  //       map((response: any) => {
+  //         response.usertype = this.capitalizeFirstLetter(response.usertype);
+  //         localStorage.setItem('user', JSON.stringify(response));
+  //         this.userSubject.next(response);
+  //         this.updateAbility(response);
+  //         return console.log(response);
+  //       })
+  //     )
+
+  // }
+
+  login(data: any) {
+    return this.getResources(StaffEndPoint + '/userLogin', {
+      email: data.email,
+      password: data.password,
+    }).pipe(
+      map((response: any) => {
+        // response[0].usertype = capitalizeFirstLetter(response[0].usertype);
+        this.saveAccessTokensFromBackendAndGetUserData(response[0]);
       })
-      .pipe(
-        map((response: any) => {
-          response.usertype = this.capitalizeFirstLetter(response.usertype);
-          localStorage.setItem('user', JSON.stringify(response));
-          this.userSubject.next(response);
-          this.updateAbility(response);
-          return console.log(response);
-        })
-      );
+    );
+  }
+  saveAccessTokensFromBackendAndGetUserData(response: any) {
+    console.log(response);
+    localStorage.setItem('user', response);
+    this.updateAbility(response);
+    return response;
   }
 
+  // verifyLogIn() {
+  //   //use token to fetch user from backend
+  //   const user = localStorage.getItem('user');
+  //   if (user) {}
+  //   return null;
+  // }
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
-    this.userSubject.next(null);
-    this.ability.update([]);
-    window.location.assign('/login');
+    // localStorage.removeItem('user');
+    // this.userSubject.next(null);
+    // this.ability.update([]);
+    // window.location.assign('/login');
     // this.router.navigate(['/login']);
-    logoutAlert();
+    // logoutAlert();
   }
 }
