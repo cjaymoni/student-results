@@ -46,6 +46,9 @@ export const getUserIdFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem(APP_USER_TOKEN)!)?.id;
 };
 
+export const getUserFromLocalStorage = () => {
+  return JSON.parse(localStorage.getItem('user')!);
+};
 export const DEFAULT_PAGE_SIZE = 200;
 
 export const capitalizeFirstLetter = (text: string) => {
@@ -54,4 +57,17 @@ export const capitalizeFirstLetter = (text: string) => {
   } else {
     return text;
   }
+};
+export const ERROR_MESSAGES_MAPPING = {
+  errors: {
+    useValue: {
+      required: 'This field is required',
+      minlength: ({ requiredLength, actualLength }: any) =>
+        `Please enter ${requiredLength} or more characters. Current count: ${actualLength}`,
+      maxlength: ({ requiredLength, actualLength }: any) =>
+        `Please enter  ${requiredLength} or less characters. Current count: ${actualLength}`,
+      email: () => `Please enter a valid email`,
+      notEquivalent: 'Password does not match',
+    },
+  },
 };

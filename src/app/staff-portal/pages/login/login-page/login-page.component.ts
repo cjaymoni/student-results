@@ -8,6 +8,7 @@ import {
 import { Router, ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError, first } from 'rxjs/operators';
+import { NavigatorService } from 'src/app/shared/services/navigator.service';
 import { AuthenticationService } from '../services/auth.service';
 
 @Component({
@@ -21,8 +22,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
-    private loginService: AuthenticationService
+    private loginService: AuthenticationService,
+    private navigator: NavigatorService
   ) {}
 
   ngOnInit() {
@@ -48,7 +49,7 @@ export class LoginPageComponent implements OnInit {
         .login(this.loginForm.value)
         .pipe()
         .subscribe((res: any) => {
-          console.log(res);
+          this.navigator.goToRoute(['/dashboard']);
         });
     }
   }

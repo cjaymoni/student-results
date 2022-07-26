@@ -7,6 +7,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/login/login.module').then((module) => module.LoginModule),
   },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./pages/dashboard/dashboard.module').then(
+        (module) => module.DashboardModule // <-- DashboardModule is loaded lazily
+      ),
+  },
 ];
 
 @NgModule({

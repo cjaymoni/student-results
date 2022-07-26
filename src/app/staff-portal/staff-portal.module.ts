@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StaffPortalLayoutComponent } from './staff-portal-layout/staff-portal-layout.component';
 import { StaffPortalRoutingModule } from './staff-portal-routing.module';
 import { LoginModule } from './pages/login/login.module';
+import { StaffPortalLayoutModule } from './staff-portal-layout/staff-portal-layout.module';
 
 @NgModule({
-  declarations: [StaffPortalLayoutComponent],
-  imports: [CommonModule, StaffPortalRoutingModule, LoginModule],
-  exports: [StaffPortalLayoutComponent],
+  imports: [
+    CommonModule,
+    StaffPortalLayoutModule,
+    StaffPortalRoutingModule,
+    LoginModule,
+  ],
+  exports: [StaffPortalLayoutModule],
 })
 export class StaffPortalModule {}

@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../services/auth.service';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { AuthenticationService } from '../services/auth.service';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    ErrorTailorModule,
   ],
   declarations: [LoginPageComponent],
   exports: [LoginPageComponent],

@@ -10,7 +10,7 @@
         </div>
         <h1 class="header-style">Login</h1>
 
-        <form [formGroup]="loginForm">
+        <form [formGroup]="loginForm" errorTailor>
           <mat-form-field class="full-width">
             <mat-label>Email</mat-label>
             <input
@@ -21,7 +21,14 @@
               placeholder="Ex. ice@example.com"
               formControlName="email"
               required
+              [controlErrorAnchor]="nameError"
             />
+            <mat-error
+              ><ng-template
+                controlErrorAnchor
+                #nameError="controlErrorAnchor"
+              ></ng-template
+            ></mat-error>
           </mat-form-field>
           <br />
 

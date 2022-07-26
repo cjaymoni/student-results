@@ -10,6 +10,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { HttpClientModule } from '@angular/common/http';
 import { AbilityModule } from '@casl/angular';
 import { Ability, PureAbility } from '@casl/ability';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { ERROR_MESSAGES_MAPPING } from './shared/utils/app-constants';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +23,17 @@ import { Ability, PureAbility } from '@casl/ability';
     BrowserAnimationsModule,
     StudentPortalModule,
     StaffPortalModule,
+    ErrorTailorModule.forRoot({
+      ...ERROR_MESSAGES_MAPPING,
+      blurPredicate(element) {
+        return (
+          element.tagName === 'INPUT' ||
+          element.tagName === 'SELECT' ||
+          element.tagName === 'TEXTAREA' ||
+          element.tagName === 'MAT-FORM-FIELD'
+        );
+      },
+    }),
   ],
   providers: [
     { provide: Ability, useValue: new Ability() },

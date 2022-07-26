@@ -168,13 +168,13 @@ export class AuthenticationService extends ResourceService {
     }).pipe(
       map((response: any) => {
         // response[0].usertype = capitalizeFirstLetter(response[0].usertype);
-        this.saveAccessTokensFromBackendAndGetUserData(response[0]);
+        return this.saveAccessTokensFromBackendAndGetUserData(response[0]);
       })
     );
   }
   saveAccessTokensFromBackendAndGetUserData(response: any) {
     console.log(response);
-    localStorage.setItem('user', response);
+    localStorage.setItem('user', JSON.stringify(response));
     this.updateAbility(response);
     return response;
   }

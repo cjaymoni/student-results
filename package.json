@@ -23,6 +23,7 @@
     "@angular/router": "~13.3.0",
     "@casl/ability": "^5.4.4",
     "@casl/angular": "^7.0.0",
+    "@ngneat/error-tailor": "^2.2.0",
     "ngx-spinner": "^14.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
