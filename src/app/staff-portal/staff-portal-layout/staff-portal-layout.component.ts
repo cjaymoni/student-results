@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getUserFromLocalStorage } from '../../shared/utils/app-constants';
+import { AuthenticationService } from '../pages/login/services/auth.service';
 
 @Component({
   selector: 'app-staff-portal-layout',
@@ -7,10 +8,14 @@ import { getUserFromLocalStorage } from '../../shared/utils/app-constants';
   styleUrls: ['./staff-portal-layout.component.scss'],
 })
 export class StaffPortalLayoutComponent implements OnInit {
-  isLoggedIn = getUserFromLocalStorage() || '';
-  constructor() {}
+  isLoggedIn!: any;
+  constructor(private loginService: AuthenticationService) {
+    if (this.loginService.loggedInUser) {
+      this.isLoggedIn = true;
+    }
+  }
 
   ngOnInit() {
-    console.log(getUserFromLocalStorage());
+    console.log(this.isLoggedIn);
   }
 }

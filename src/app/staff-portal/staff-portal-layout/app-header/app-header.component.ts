@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-app-header',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-header.component.scss'],
 })
 export class AppHeaderComponent implements OnInit {
+  @Input() sideNav!: any;
   constructor() {}
 
   ngOnInit() {}

@@ -3,3 +3,9 @@ mat-toolbar {
   color: white;
   position: sticky;
 }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

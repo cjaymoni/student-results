@@ -1,17 +1,22 @@
-<mat-toolbar class="tool">
-  <!-- <button
+<mat-toolbar class="toolbar">
+  <div>
+    <button
       mat-icon-button
       class="example-icon"
-      *ngIf="sidenav.mode === 'over'"
-      (click)="sidenav.toggle()"
+      *ngIf="sideNav.mode === 'over'"
+      (click)="sideNav.toggle()"
     >
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
-    </button> -->
-  <mat-icon class="example-icon">history_edu</mat-icon>&nbsp;
-  <nav></nav>
+      <mat-icon *ngIf="!sideNav.opened"> menu </mat-icon>
+      <mat-icon *ngIf="sideNav.opened"> close </mat-icon>
+    </button>
 
-  <span>Student Results Management System</span>
+    <span>
+      <button mat-icon-button>
+        <mat-icon class="">history_edu</mat-icon></button
+      >Student Results Management System</span
+    >
+  </div>
+
   <span class="example-spacer"></span>
   <div class="right-top">
     <button

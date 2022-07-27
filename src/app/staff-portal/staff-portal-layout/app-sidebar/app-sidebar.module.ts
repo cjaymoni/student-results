@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { AbilityModule } from '@casl/angular';
+import { AppHeaderModule } from '../app-header/app-header.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { AbilityModule } from '@casl/angular';
     MatIconModule,
     RouterModule,
     AbilityModule,
+    AppHeaderModule,
   ],
   declarations: [AppSidebarComponent],
   exports: [AppSidebarComponent],
